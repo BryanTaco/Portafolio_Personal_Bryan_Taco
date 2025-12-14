@@ -1,14 +1,19 @@
 import React, { useState, useEffect, createContext, useContext } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
-  Moon, Sun, Calendar, Briefcase, Code, BookOpen, Award, ArrowLeft,
-  Github, Linkedin, Mail, Phone, MapPin, Clock, Download, Globe
+  Moon, Sun, Calendar, Briefcase, Award, ArrowLeft,
+  Github, Linkedin, Mail, Phone, MapPin, Download
 } from 'lucide-react';
+import axios from 'axios';
 
-const datosCV = {
-  nombre: "Bryan Steven Taco Jaramillo",
+const api = axios.create({
+  baseURL: 'http://localhost:3000'
+});
+
+// Datos estáticos (foto, contacto, educación, referencias)
+const datosEstaticos = {
+  nombre: "Bryan Steven Taco",
   titulo: "Estudiante en Desarrollo de Software",
-  subtitulo: "Desarrollador Web | Soporte Técnico | Diseño Digital",
   email: "bryantaco10@gmail.com",
   telefono: "+593 996 762 603",
   direccion: "Quito, Urb. 6 de junio etapa 2 Mnz 3 Csa 11",
@@ -16,146 +21,56 @@ const datosCV = {
   github: "https://github.com/BryanTaco",
   cvPdf: "/Bryan Steven Taco CV.pdf",
   foto: "/PERFIL.JPG",
-  resumen: "Estudiante apasionado por el desarrollo de software con experiencia práctica en creación de páginas web, soporte técnico, bases de datos y diseño digital. Busco oportunidades para aplicar y crecer en entornos profesionales.",
-  habilidades: [
-    { nombre: "Base de Datos", nivel: 85 },
-    { nombre: "Creación de API", nivel: 80 },
-    { nombre: "Desarrollo Web", nivel: 90 },
-    { nombre: "Soporte Técnico Web", nivel: 88 },
-    { nombre: "Diseño con Canva", nivel: 90 },
-    { nombre: "Illustrator", nivel: 75 },
-    { nombre: "Configuración PC/Celulares", nivel: 92 },
-    { nombre: "Office (Word, Excel, PowerPoint)", nivel: 95 }
+  educacion: [
+    { titulo: "PRIMARIA", institucion: "Unidad Educativa Hermano Miguel 'La Salle'", periodo: "2010" },
+    { titulo: "SECUNDARIA", institucion: "Unidad Educativa 'La Salle'", periodo: "2018" },
+    { titulo: "NO CULMINADO", institucion: "Escuela Politécnica Nacional Ing. en Sistemas", periodo: "" },
+    { titulo: "EN PROCESO", institucion: "Universidad Católica del Ecuador Desarrollo de Software", periodo: "" }
+  ],
+  referencias: [
+    { nombre: "MBA. Marco F. Taco Iturralde", cargo: "Jefe Gestión Financiera EP PETROECUADOR", contacto: "2563060 Ext.42043 | marco.taco@eppetroecuador.ec" },
+    { nombre: "Téc. Stalin Campaña", cargo: "Ing. Técnico de Maquinaria Pesada CATERPILLAR", contacto: "0987136663 | stalin15_sj@hotmail.com" },
+    { nombre: "Sra. Ilda Totoy", cargo: "Propietaria CAFETERÍA AROMA DULCE", contacto: "0989584282" }
   ],
   habilidadesDetalles: {
     "Base de Datos": "MongoDB, PostgreSQL, MySQL, SQL Server",
-    "Creación de API": "RESTful APIs con Node.js, Express, FastAPI",
+    "Creación de Api": "RESTful APIs con Node.js, Express, FastAPI",
     "Desarrollo Web": "React, Next.js, HTML5, CSS3, JavaScript, Tailwind CSS",
-    "Soporte Técnico Web": "Debugging, mantenimiento de servidores, hosting (Vercel, Netlify, Heroku)",
-    "Diseño con Canva": "Diseño gráfico, banners, posters, redes sociales",
-    "Illustrator": "Vector graphics, logos, ilustraciones",
-    "Configuración PC/Celulares": "Ensamblaje de hardware, instalación de SO (Windows, Linux), solución de problemas",
-    "Office (Word, Excel, PowerPoint)": "Fórmulas avanzadas en Excel, formato de documentos, presentaciones profesionales"
-  },
-  idiomas: [
-    { nombre: "Español", nivel: "Nativo" },
-    { nombre: "Inglés", nivel: "Intermedio" }
-  ],
-  experienciaLaboral: [
-    {
-      empresa: "Destellos de Amor",
-      puesto: "Desarrollador Web y Soporte Técnico",
-      periodo: "2024 - Actual",
-      actual: true,
-      descripcion: "Elaboración de publicidad mediante páginas web. Soporte a maquinarias y mantenimiento.",
-      responsable: "Katherine Taco - 098451104"
-    },
-    {
-      empresa: "SECURITY S.A",
-      puesto: "Seguridad Web",
-      periodo: "2023",
-      descripcion: "Funciones de seguridad de páginas web.",
-      responsable: "Andrea Pinto"
-    },
-    {
-      empresa: "Automotors S.A",
-      puesto: "Digitador Responsable",
-      periodo: "2023",
-      descripcion: "Digitación y manejo de base de datos.",
-      responsable: "María José Escanta - 0998602722"
-    },
-    {
-      empresa: "Cyber Liz",
-      puesto: "Atención al Cliente",
-      periodo: "2019",
-      descripcion: "Atención al cliente en cibercafé.",
-      responsable: "Rodrigo Taco - 0985834706"
-    }
-  ],
-  educacion: [
-    {
-      titulo: "Desarrollo de Software",
-      institucion: "Pontificia Universidad Católica del Ecuador",
-      periodo: "En proceso",
-      descripcion: "Actualmente cursando la carrera con enfoque en desarrollo de software."
-    },
-    {
-      titulo: "Ingeniería en Sistemas",
-      institucion: "Escuela Politécnica Nacional",
-      periodo: "No culminado",
-      descripcion: ""
-    },
-    {
-      titulo: "Secundaria",
-      institucion: "Unidad Educativa 'La Salle'",
-      periodo: "2018",
-      descripcion: ""
-    },
-    {
-      titulo: "Primaria",
-      institucion: "Unidad Educativa Hermano Miguel 'La Salle'",
-      periodo: "2010",
-      descripcion: ""
-    }
-  ],
-  referencias: [
-    {
-      nombre: "MBA. Marco F. Taco Iturralde",
-      cargo: "Jefe Gestión Financiera EP PETROECUADOR",
-      contacto: "2563060 Ext. 42043 | marco.taco@eppetroecuador.ec"
-    },
-    {
-      nombre: "Téc. Stalin Campaña",
-      cargo: "Ing. Técnico de Maquinaria Pesada CATERPILLAR",
-      contacto: "0987136663 | stalin15_sj@hotmail.com"
-    },
-    {
-      nombre: "Sra. Ilda Totoy",
-      cargo: "Propietaria CAFETERÍA AROMA DULCE",
-      contacto: "0989584282"
-    }
-  ]
+    "Soporte de Web": "Debugging, mantenimiento de servidores, hosting",
+    "Illustrador": "Vector graphics, logos, ilustraciones",
+    "Configuración de Computadoras y Celulares": "Ensamblaje de hardware, instalación de SO, solución de problemas",
+    "Manejo de Word, Excel, PowerPoint": "Fórmulas avanzadas, formato profesional",
+    "Creación de Páginas Web": "React, HTML5, CSS3, JavaScript, Tailwind",
+    "Canva Arreglo y Detalles en Web": "Diseño gráfico, banners, redes sociales"
+  }
 };
 
-const datosPosts = [
-  {
-    id: 1,
-    title: "Cómo construir una lista de tareas con React y JSON Server",
-    date: "2025-04-10",
-    excerpt: "Tutorial completo para crear una aplicación CRUD usando React, Axios y JSON Server",
-    content: `# Introducción...\n\n## Conclusión...`
-  },
-  {
-    id: 2,
-    title: "Análisis de la propuesta Temporal en TC39",
-    date: "2025-04-15",
-    excerpt: "Explorando la revolucionaria API Temporal para manejo de fechas en JavaScript",
-    content: `# La Propuesta Temporal...\n\n## Conclusión...`
-  }
-];
-
+// Theme Context
 const ThemeContext = createContext();
 
 function ThemeProvider({ children }) {
-  const [theme, setTheme] = useState('dark');
+  const [theme, setTheme] = useState(() => {
+    if (typeof window !== 'undefined') {
+      const saved = localStorage.getItem('theme');
+      if (saved) return saved;
+      return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    }
+    return 'dark';
+  });
 
   useEffect(() => {
     document.documentElement.classList.toggle('dark', theme === 'dark');
+    localStorage.setItem('theme', theme);
   }, [theme]);
 
-  const toggleTheme = () => setTheme(prev => prev === 'light' ? 'dark' : 'light');
+  const toggleTheme = () => setTheme(prev => prev === 'dark' ? 'light' : 'dark');
 
-  return (
-    <ThemeContext.Provider value={{ theme, toggleTheme }}>
-      {children}
-    </ThemeContext.Provider>
-  );
+  return <ThemeContext.Provider value={{ theme, toggleTheme }}>{children}</ThemeContext.Provider>;
 }
 
-function useTheme() {
-  return useContext(ThemeContext);
-}
+function useTheme() { return useContext(ThemeContext); }
 
+// Router
 function Router({ children }) {
   const [path, setPath] = useState(window.location.pathname);
 
@@ -174,6 +89,7 @@ function Router({ children }) {
   return children({ path, navigate });
 }
 
+// Header
 function Header({ navigate, currentPath }) {
   const { theme, toggleTheme } = useTheme();
 
@@ -185,10 +101,7 @@ function Header({ navigate, currentPath }) {
       className="fixed top-0 w-full z-50 bg-slate-900/95 backdrop-blur-md border-b border-slate-800"
     >
       <div className="max-w-7xl mx-auto px-6 py-5 flex justify-between items-center">
-        <motion.div
-          whileHover={{ scale: 1.05 }}
-          className="w-12 h-12 bg-gradient-to-br from-slate-600 to-indigo-700 rounded-full flex items-center justify-center text-white text-2xl font-bold shadow-xl"
-        >
+        <motion.div whileHover={{ scale: 1.05 }} className="w-12 h-12 bg-gradient-to-br from-indigo-600 to-blue-700 rounded-full flex items-center justify-center text-white text-2xl font-bold shadow-xl">
           B
         </motion.div>
 
@@ -204,11 +117,7 @@ function Header({ navigate, currentPath }) {
           </button>
         </nav>
 
-        <motion.button
-          whileTap={{ scale: 0.9 }}
-          onClick={toggleTheme}
-          className="p-3 rounded-xl bg-slate-800 hover:bg-slate-700 transition"
-        >
+        <motion.button whileTap={{ scale: 0.9 }} onClick={toggleTheme} className="p-3 rounded-xl bg-slate-800 hover:bg-slate-700 transition">
           {theme === 'dark' ? <Sun className="w-6 h-6 text-yellow-400" /> : <Moon className="w-6 h-6" />}
         </motion.button>
       </div>
@@ -216,197 +125,127 @@ function Header({ navigate, currentPath }) {
   );
 }
 
+// Home - Carga experiencia desde API
 function Home() {
+  const [experiencia, setExperiencia] = useState([]);
+
+  useEffect(() => {
+    api.get('/experiencia')
+      .then(res => setExperiencia(res.data))
+      .catch(() => setExperiencia([]));
+  }, []);
+
   return (
-    <div className="min-h-screen bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950 text-white pt-24">
-      {/* Hero */}
-      <section className="py-20 px-6">
-        <div className="max-w-7xl mx-auto">
-          <div className="grid md:grid-cols-2 gap-16 items-center">
-            <motion.div
-              initial={{ opacity: 0, x: -80 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8 }}
-              className="space-y-10"
-            >
-              <div className="flex items-center gap-8">
-                <motion.img
-                  whileHover={{ scale: 1.05 }}
-                  src={datosCV.foto}
-                  alt="Bryan Steven Taco"
-                  className="w-48 h-48 rounded-full ring-8 ring-slate-700 shadow-2xl object-cover"
-                />
-                <div>
-                  <h1 className="text-5xl font-bold text-slate-100">{datosCV.nombre}</h1>
-                  <p className="text-2xl text-indigo-400 mt-3">{datosCV.titulo}</p>
-                  <p className="text-lg text-slate-400">{datosCV.subtitulo}</p>
-                </div>
-              </div>
+    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-blue-900/70 to-slate-900 text-white pt-20">
+      <div className="max-w-7xl mx-auto px-6">
+        {/* Hero */}
+        <section className="py-16 grid md:grid-cols-2 gap-12 items-center">
+          <motion.div initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.8 }}>
+            <img src={datosEstaticos.foto} alt="Bryan Steven Taco" className="w-80 h-80 rounded-full ring-8 ring-white/20 shadow-2xl object-cover mx-auto" />
+          </motion.div>
 
-              <p className="text-lg text-slate-300 leading-relaxed max-w-2xl">{datosCV.resumen}</p>
+          <motion.div initial={{ opacity: 0, x: 100 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.8 }} className="space-y-8">
+            <h1 className="text-6xl font-bold">{datosEstaticos.nombre}</h1>
+            <div className="bg-blue-950/80 rounded-lg p-6 inline-block">
+              <p className="text-2xl font-semibold">Sobre Mí</p>
+              <p className="text-xl mt-2">{datosEstaticos.titulo}</p>
+            </div>
 
-              <div className="flex gap-6">
-                <motion.a
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  href={datosCV.cvPdf}
-                  download
-                  className="flex items-center gap-3 bg-indigo-600 hover:bg-indigo-700 px-8 py-4 rounded-xl font-semibold text-lg shadow-xl transition"
-                >
-                  <Download className="w-6 h-6" /> Descargar CV
-                </motion.a>
-                <motion.a whileHover={{ scale: 1.2 }} href={datosCV.github} target="_blank" rel="noopener" className="p-4 bg-slate-800 rounded-xl hover:bg-slate-700 transition"><Github className="w-8 h-8" /></motion.a>
-                <motion.a whileHover={{ scale: 1.2 }} href={datosCV.linkedin} target="_blank" rel="noopener" className="p-4 bg-slate-800 rounded-xl hover:bg-slate-700 transition"><Linkedin className="w-8 h-8" /></motion.a>
-              </div>
-            </motion.div>
+            <div className="space-y-6 text-lg">
+              <a href={`tel:${datosEstaticos.telefono.replace(/\s/g, '')}`} className="flex items-center gap-4 hover:text-indigo-400 transition">
+                <Phone className="w-6 h-6 text-blue-400" /> {datosEstaticos.telefono}
+              </a>
+              <a href={`mailto:${datosEstaticos.email}`} className="flex items-center gap-4 hover:text-indigo-400 transition">
+                <Mail className="w-6 h-6 text-blue-400" /> {datosEstaticos.email}
+              </a>
+              <a href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(datosEstaticos.direccion)}`} target="_blank" className="flex items-center gap-4 hover:text-indigo-400 transition">
+                <MapPin className="w-6 h-6 text-blue-400" /> {datosEstaticos.direccion}
+              </a>
+            </div>
 
-            <motion.div
-              initial={{ opacity: 0, x: 80 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8 }}
-              className="bg-slate-800/80 backdrop-blur-2xl rounded-3xl p-10 border border-slate-600/60 shadow-2xl"
-            >
-              <h3 className="text-2xl font-bold mb-8 flex items-center gap-4"><Mail className="w-8 h-8 text-indigo-400" /> Contacto</h3>
-              <div className="space-y-6 text-lg text-slate-300">
-                <a href={`tel:${datosCV.telefono.replace(/\s/g, '')}`} className="flex items-center gap-4 hover:text-indigo-400 transition">
-                  <Phone className="w-6 h-6" /> {datosCV.telefono}
-                </a>
-                <a href={`mailto:${datosCV.email}`} className="flex items-center gap-4 hover:text-indigo-400 transition">
-                  <Mail className="w-6 h-6" /> {datosCV.email}
-                </a>
-                <a href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(datosCV.direccion)}`} target="_blank" className="flex items-center gap-4 hover:text-indigo-400 transition">
-                  <MapPin className="w-6 h-6" /> {datosCV.direccion}
-                </a>
-              </div>
-            </motion.div>
+            <div className="flex gap-6">
+              <motion.a whileHover={{ scale: 1.05 }} href={datosEstaticos.cvPdf} download className="bg-blue-600 px-8 py-4 rounded-lg font-bold flex items-center gap-3 shadow-xl">
+                <Download className="w-6 h-6" /> Descargar CV
+              </motion.a>
+              <motion.a whileHover={{ scale: 1.2 }} href={datosEstaticos.github} target="_blank" className="p-4 bg-blue-950/80 rounded-xl"><Github className="w-8 h-8" /></motion.a>
+              <motion.a whileHover={{ scale: 1.2 }} href={datosEstaticos.linkedin} target="_blank" className="p-4 bg-blue-950/80 rounded-xl"><Linkedin className="w-8 h-8" /></motion.a>
+            </div>
+          </motion.div>
+        </section>
+
+        {/* Experiencia Laboral */}
+        <section className="py-16 grid md:grid-cols-2 gap-12">
+          <div>
+            <h2 className="text-3xl font-bold mb-8 bg-blue-950/80 inline-block px-6 py-3 rounded">EXPERIENCIA</h2>
+            <div className="space-y-8">
+              {experiencia.map((exp, i) => (
+                <motion.div key={exp.id || i} initial={{ opacity: 0, x: 50 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1 }} className="bg-blue-950/50 rounded-lg p-6" whileHover={{ scale: 1.05 }}>
+                  <p className="font-bold text-xl">{exp.empresa} {exp.periodo && <span className="text-blue-400">({exp.periodo})</span>}</p>
+                  <p className="mt-2">{exp.puesto}</p>
+                  {exp.descripcion && <p className="mt-2 text-slate-300">{exp.descripcion}</p>}
+                  <p className="mt-4 text-sm italic">Responsable: {exp.responsable}</p>
+                </motion.div>
+              ))}
+            </div>
           </div>
-        </div>
-      </section>
 
-      {/* Experiencia */}
-      <section className="py-20 px-6 bg-slate-900/50">
-        <div className="max-w-7xl mx-auto">
-          <motion.h2 initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} className="text-4xl font-bold mb-16 text-center">
-            <Briefcase className="w-10 h-10 text-indigo-500 inline mr-4" /> Experiencia Laboral
-          </motion.h2>
+          {/* Educación */}
+          <div>
+            <h2 className="text-3xl font-bold mb-8 bg-blue-950/80 inline-block px-6 py-3 rounded">EDUCACIÓN</h2>
+            <div className="space-y-6">
+              {datosEstaticos.educacion.map((edu, i) => (
+                <motion.div key={i} initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="bg-blue-950/50 rounded-lg p-6" whileHover={{ scale: 1.05 }}>
+                  <p className="font-bold text-xl">{edu.titulo}</p>
+                  <p className="mt-2">{edu.institucion}</p>
+                  {edu.periodo && <p className="text-blue-400">{edu.periodo}</p>}
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </section>
 
-          <div className="space-y-12">
-            {datosCV.experienciaLaboral.map((exp, i) => (
-              <motion.div 
-                key={i} 
-                initial={{ opacity: 0, y: 50 }} 
-                whileInView={{ opacity: 1, y: 0 }} 
-                viewport={{ once: true }} 
-                transition={{ delay: i * 0.2 }}
-                className="bg-slate-800/80 backdrop-blur-2xl rounded-3xl p-10 border border-slate-600/60 relative shadow-2xl"
-                whileHover={{ 
-                  scale: 1.05, 
-                  y: -20, 
-                  boxShadow: '0 30px 60px -12px rgba(79, 70, 229, 0.5)' 
-                }}
-                transition={{ type: "spring", stiffness: 300 }}
-              >
-                {exp.actual && <span className="absolute -top-3 right-8 px-5 py-1 bg-green-900/70 text-green-400 rounded-full text-sm font-bold">Actual</span>}
-                <h3 className="text-2xl font-bold text-indigo-300">{exp.puesto}</h3>
-                <p className="text-xl text-slate-300 mt-2">{exp.empresa}</p>
-                <p className="text-slate-400 mt-3 flex items-center gap-3"><Clock className="w-5 h-5" /> {exp.periodo}</p>
-                <p className="text-slate-300 mt-6 leading-relaxed">{exp.descripcion}</p>
-                <p className="text-slate-500 mt-4 italic">Referencia: {exp.responsable}</p>
+        {/* Referencias */}
+        <section className="py-16 pb-32">
+          <h2 className="text-3xl font-bold mb-8 bg-blue-950/80 inline-block px-6 py-3 rounded">REFERENCIAS</h2>
+          <div className="grid md:grid-cols-3 gap-8">
+            {datosEstaticos.referencias.map((ref, i) => (
+              <motion.div key={i} initial={{ opacity: 0, scale: 0.9 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }} transition={{ delay: i * 0.2 }} className="bg-blue-950/50 rounded-lg p-6 text-center" whileHover={{ scale: 1.05 }}>
+                <p className="font-bold text-xl">• {ref.nombre}</p>
+                <p className="mt-2 text-slate-300">{ref.cargo}</p>
+                <p className="mt-4 text-sm">{ref.contacto}</p>
               </motion.div>
             ))}
           </div>
-        </div>
-      </section>
-
-      {/* Educación */}
-      <section className="py-20 px-6 max-w-7xl mx-auto">
-        <motion.h2 initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} className="text-4xl font-bold mb-16 text-center">
-          <Award className="w-10 h-10 text-indigo-500 inline mr-4" /> Educación
-        </motion.h2>
-
-        <div className="grid md:grid-cols-2 gap-10">
-          {datosCV.educacion.map((edu, i) => (
-            <motion.div 
-              key={i} 
-              initial={{ opacity: 0, scale: 0.95 }} 
-              whileInView={{ opacity: 1, scale: 1 }} 
-              viewport={{ once: true }}
-              className="bg-slate-800/80 backdrop-blur-2xl rounded-3xl p-10 border border-slate-600/60 shadow-2xl"
-              whileHover={{ 
-                scale: 1.05, 
-                y: -20, 
-                boxShadow: '0 30px 60px -12px rgba(79, 70, 229, 0.5)' 
-              }}
-              transition={{ type: "spring", stiffness: 300 }}
-            >
-              <h3 className="text-2xl font-bold text-indigo-300">{edu.titulo}</h3>
-              <p className="text-xl text-slate-300 mt-3">{edu.institucion}</p>
-              <p className="text-slate-400 mt-3">{edu.periodo}</p>
-              {edu.descripcion && <p className="text-slate-300 mt-5 italic">{edu.descripcion}</p>}
-            </motion.div>
-          ))}
-        </div>
-      </section>
-
-      {/* Referencias */}
-      <section className="py-20 px-6 bg-slate-900/50 pb-32">
-        <div className="max-w-7xl mx-auto">
-          <motion.h2 initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} className="text-4xl font-bold mb-16 text-center">
-            Referencias
-          </motion.h2>
-
-          <div className="grid md:grid-cols-3 gap-10">
-            {datosCV.referencias.map((ref, i) => (
-              <motion.div 
-                key={i} 
-                initial={{ opacity: 0, y: 50 }} 
-                whileInView={{ opacity: 1, y: 0 }} 
-                viewport={{ once: true }} 
-                transition={{ delay: i * 0.2 }}
-                className="bg-slate-800/80 backdrop-blur-2xl rounded-3xl p-10 border border-slate-600/60 text-center shadow-2xl"
-                whileHover={{ 
-                  scale: 1.05, 
-                  y: -20, 
-                  boxShadow: '0 30px 60px -12px rgba(79, 70, 229, 0.5)' 
-                }}
-                transition={{ type: "spring", stiffness: 300 }}
-              >
-                <h4 className="text-xl font-bold text-indigo-300">{ref.nombre}</h4>
-                <p className="text-slate-300 mt-3">{ref.cargo}</p>
-                <p className="text-slate-400 mt-5">{ref.contacto}</p>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
+        </section>
+      </div>
     </div>
   );
 }
 
+// HabilidadesPage - carga desde API
 function HabilidadesPage({ navigate }) {
+  const [habilidades, setHabilidades] = useState([]);
+
+  useEffect(() => {
+    api.get('/habilidades')
+      .then(res => setHabilidades(res.data))
+      .catch(err => console.error(err));
+  }, []);
+
   return (
-    <div className="min-h-screen bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950 text-white pt-24 px-6">
+    <div className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 text-white pt-24 px-6">
       <div className="max-w-7xl mx-auto py-20">
-        <motion.button
-          initial={{ opacity: 0, x: -50 }}
-          animate={{ opacity: 1, x: 0 }}
-          onClick={() => navigate('/')}
-          className="flex items-center gap-3 text-indigo-400 mb-12 hover:text-indigo-300 text-lg"
-        >
+        <motion.button initial={{ opacity: 0, x: -50 }} animate={{ opacity: 1, x: 0 }} onClick={() => navigate('/')} className="flex items-center gap-3 text-indigo-400 mb-12 hover:text-indigo-300 text-lg">
           <ArrowLeft className="w-6 h-6" />
           Volver al inicio
         </motion.button>
 
-        <motion.h1 
-          initial={{ opacity: 0, y: 50 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="text-5xl font-bold text-center mb-16"
-        >
+        <motion.h1 initial={{ opacity: 0, y: 50 }} animate={{ opacity: 1, y: 0 }} className="text-5xl font-bold text-center mb-16">
           Habilidades Detalladas
         </motion.h1>
 
         <div className="grid md:grid-cols-2 gap-12">
-          {datosCV.habilidades.map((skill, i) => (
+          {habilidades.map((skill, i) => (
             <motion.div 
               key={i} 
               initial={{ opacity: 0, scale: 0.9 }}
@@ -414,12 +253,7 @@ function HabilidadesPage({ navigate }) {
               viewport={{ once: true }}
               transition={{ delay: i * 0.1 }}
               className="bg-slate-800/80 backdrop-blur-2xl rounded-3xl p-10 border border-slate-600/60 shadow-2xl"
-              whileHover={{ 
-                scale: 1.05, 
-                y: -20, 
-                boxShadow: '0 30px 60px -12px rgba(79, 70, 229, 0.5)' 
-              }}
-              transition={{ type: "spring", stiffness: 300 }}
+              whileHover={{ scale: 1.05, y: -20, boxShadow: '0 30px 60px -12px rgba(79, 70, 229, 0.5)' }}
             >
               <div className="flex justify-between text-xl mb-4">
                 <span className="font-bold">{skill.nombre}</span>
@@ -435,7 +269,7 @@ function HabilidadesPage({ navigate }) {
                 />
               </div>
               <p className="text-slate-300 leading-relaxed">
-                {datosCV.habilidadesDetalles[skill.nombre] || "Experiencia práctica en esta área."}
+                {datosEstaticos.habilidadesDetalles[skill.nombre] || "Experiencia práctica en esta área."}
               </p>
             </motion.div>
           ))}
@@ -445,7 +279,16 @@ function HabilidadesPage({ navigate }) {
   );
 }
 
+// BlogList y BlogPost (carga desde API)
 function BlogList({ navigate }) {
+  const [posts, setPosts] = useState([]);
+
+  useEffect(() => {
+    api.get('/posts')
+      .then(res => setPosts(res.data))
+      .catch(() => setPosts([]));
+  }, []);
+
   return (
     <div className="min-h-screen bg-gradient-to-b from-slate-950 to-slate-900 text-white pt-24 px-6">
       <div className="max-w-5xl mx-auto py-20">
@@ -453,25 +296,12 @@ function BlogList({ navigate }) {
         <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.3 }} className="text-xl text-slate-400 text-center mb-16">Tutoriales y análisis sobre desarrollo web</motion.p>
 
         <div className="grid gap-12">
-          {datosPosts.map((post, i) => (
-            <motion.article
-              key={post.id}
-              initial={{ opacity: 0, y: 50 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.2 }}
-              onClick={() => navigate(`/posts/${post.id}`)}
-              className="bg-slate-800/60 backdrop-blur-xl rounded-3xl p-10 border border-slate-700 cursor-pointer hover:border-indigo-500/50 transition-all hover:shadow-2xl hover:shadow-indigo-500/30"
-            >
+          {posts.map((post, i) => (
+            <motion.article key={post.id} initial={{ opacity: 0, y: 50 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.2 }} onClick={() => navigate(`/posts/${post.id}`)} className="bg-slate-800/60 backdrop-blur-xl rounded-3xl p-10 border border-slate-700 cursor-pointer hover:border-indigo-500/50 transition-all hover:shadow-2xl hover:shadow-indigo-500/30">
               <h2 className="text-3xl font-bold mb-4">{post.title}</h2>
-              <time className="text-slate-400 flex items-center gap-3 mb-6">
-                <Calendar className="w-5 h-5" />
-                {new Date(post.date).toLocaleDateString('es-ES', { year: 'numeric', month: 'long', day: 'numeric' })}
-              </time>
+              <time className="text-slate-400 flex items-center gap-3 mb-6"><Calendar className="w-5 h-5" /> {new Date(post.date).toLocaleDateString('es-ES', { year: 'numeric', month: 'long', day: 'numeric' })}</time>
               <p className="text-slate-300 text-lg leading-relaxed">{post.excerpt}</p>
-              <button className="mt-8 text-indigo-400 font-medium hover:text-indigo-300">
-                Leer más →
-              </button>
+              <button className="mt-8 text-indigo-400 font-medium hover:text-indigo-300">Leer más →</button>
             </motion.article>
           ))}
         </div>
@@ -482,54 +312,28 @@ function BlogList({ navigate }) {
 
 function BlogPost({ path, navigate }) {
   const postId = parseInt(path.split('/').pop());
-  const post = datosPosts.find(p => p.id === postId);
+  const [post, setPost] = useState(null);
 
-  if (!post) {
-    return (
-      <div className="min-h-screen bg-slate-950 flex items-center justify-center text-white">
-        <div className="text-center">
-          <h2 className="text-4xl font-bold mb-8">Post no encontrado</h2>
-          <button onClick={() => navigate('/posts')} className="text-indigo-400 hover:underline">
-            ← Volver al blog
-          </button>
-        </div>
-      </div>
-    );
-  }
+  useEffect(() => {
+    api.get(`/posts/${postId}`)
+      .then(res => setPost(res.data))
+      .catch(() => setPost(null));
+  }, [postId]);
+
+  if (!post) return <div className="min-h-screen flex items-center justify-center text-white"><p>Cargando...</p></div>;
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-slate-950 to-slate-900 text-white pt-24 px-6">
       <div className="max-w-4xl mx-auto py-20">
-        <motion.button
-          initial={{ opacity: 0, x: -50 }}
-          animate={{ opacity: 1, x: 0 }}
-          onClick={() => navigate('/posts')}
-          className="flex items-center gap-3 text-indigo-400 mb-12 hover:text-indigo-300 text-lg"
-        >
+        <motion.button initial={{ opacity: 0, x: -50 }} animate={{ opacity: 1, x: 0 }} onClick={() => navigate('/posts')} className="flex items-center gap-3 text-indigo-400 mb-12 hover:text-indigo-300 text-lg">
           <ArrowLeft className="w-6 h-6" />
           Volver al blog
         </motion.button>
 
-        <motion.article
-          initial={{ opacity: 0, y: 50 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="bg-slate-800/60 backdrop-blur-xl rounded-3xl p-12 border border-slate-700 shadow-2xl"
-        >
+        <motion.article initial={{ opacity: 0, y: 50 }} animate={{ opacity: 1, y: 0 }} className="bg-slate-800/60 backdrop-blur-xl rounded-3xl p-12 border border-slate-700 shadow-2xl">
           <h1 className="text-5xl font-bold mb-8 leading-tight">{post.title}</h1>
-          <time className="text-slate-400 flex items-center gap-4 text-lg mb-12">
-            <Calendar className="w-6 h-6" />
-            {new Date(post.date).toLocaleDateString('es-ES', { year: 'numeric', month: 'long', day: 'numeric' })}
-          </time>
-
-          <div className="prose prose-invert prose-lg max-w-none text-slate-300 leading-relaxed space-y-6">
-            {post.content.split('\n').map((line, i) => {
-              if (line.startsWith('# ')) return <h1 key={i} className="text-4xl font-bold mt-12 mb-6">{line.slice(2)}</h1>;
-              if (line.startsWith('## ')) return <h2 key={i} className="text-3xl font-bold mt-10 mb-4">{line.slice(3)}</h2>;
-              if (line.startsWith('```')) return <pre key={i} className="bg-slate-800 p-8 rounded-2xl overflow-x-auto my-12"><code className="text-sm">{line.slice(3)}</code></pre>;
-              if (line.trim() === '') return <div key={i} className="my-8" />;
-              return <p key={i}>{line}</p>;
-            })}
-          </div>
+          <time className="text-slate-400 flex items-center gap-4 text-lg mb-12"><Calendar className="w-6 h-6" /> {new Date(post.date).toLocaleDateString('es-ES', { year: 'numeric', month: 'long', day: 'numeric' })}</time>
+          <div className="prose prose-invert prose-lg max-w-none text-slate-300 leading-relaxed space-y-6" dangerouslySetInnerHTML={{ __html: post.content.replace(/\n/g, '<br>') }} />
         </motion.article>
       </div>
     </div>
@@ -545,9 +349,9 @@ function App() {
             <Header navigate={navigate} currentPath={path} />
             <AnimatePresence mode="wait">
               {path === '/' && <motion.div key="home" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}><Home /></motion.div>}
+              {path === '/habilidades' && <motion.div key="habilidades"><HabilidadesPage navigate={navigate} /></motion.div>}
               {path === '/posts' && <motion.div key="bloglist"><BlogList navigate={navigate} /></motion.div>}
               {path.startsWith('/posts/') && <motion.div key="post"><BlogPost path={path} navigate={navigate} /></motion.div>}
-              {path === '/habilidades' && <motion.div key="habilidades"><HabilidadesPage navigate={navigate} /></motion.div>}
             </AnimatePresence>
           </>
         )}

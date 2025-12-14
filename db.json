@@ -1,60 +1,63 @@
 {
-  "experiencia": [
-    {
-      "id": 1,
-      "nombre": "María Fernanda García",
-      "titulo": "Desarrolladora Full Stack",
-      "email": "maria.garcia@email.com",
-      "telefono": "+593 99 123 4567",
-      "ubicacion": "Quito, Ecuador",
-      "resumen": "Desarrolladora apasionada por crear soluciones web innovadoras con 3+ años de experiencia en React, Node.js y arquitecturas modernas.",
-      "habilidades": ["React", "Node.js", "TypeScript", "MongoDB", "REST APIs", "Git", "Tailwind CSS", "Docker"],
-      "educacion": [
-        {
-          "titulo": "Ingeniería en Sistemas",
-          "institucion": "Universidad Central del Ecuador",
-          "periodo": "2018 - 2023",
-          "descripcion": "Mención honorífica en proyecto de grado"
-        }
-      ],
-      "experienciaLaboral": [
-        {
-          "puesto": "Desarrolladora Frontend",
-          "empresa": "TechSolutions Ec",
-          "periodo": "2023 - Presente",
-          "logros": [
-            "Desarrollo de aplicaciones React con TypeScript",
-            "Implementación de design systems reutilizables",
-            "Mejora del 40% en performance de aplicaciones"
-          ]
-        },
-        {
-          "puesto": "Desarrolladora Junior",
-          "empresa": "StartupLab",
-          "periodo": "2022 - 2023",
-          "logros": [
-            "Creación de APIs RESTful con Express",
-            "Integración de pasarelas de pago",
-            "Colaboración en equipo ágil (Scrum)"
-          ]
-        }
-      ]
-    }
-  ],
   "posts": [
     {
       "id": 1,
       "title": "Cómo construir una lista de tareas con React y JSON Server",
       "date": "2025-04-10",
       "excerpt": "Tutorial completo para crear una aplicación CRUD usando React, Axios y JSON Server",
-      "content": "Ver contenido completo en el artifact..."
+      "content": "# Cómo construir una lista de tareas con React y JSON Server\n\nEn este tutorial aprenderás a crear una aplicación completa de lista de tareas (Todo List) con operaciones CRUD usando React en el frontend y JSON Server como backend simulado.\n\n## Requisitos\n- Node.js instalado\n- Crear proyecto React con Vite\n- Instalar Axios y JSON Server\n\n## Paso 1: Configurar JSON Server\nCrea `db.json` con:\n```json\n{\n  \"todos\": []\n}\n```\nEjecuta: `json-server --watch db.json --port 3000`\n\n## Paso 2: Frontend con React\nUsa Axios para:\n- GET /todos → listar\n- POST /todos → crear\n- PUT /todos/:id → actualizar\n- DELETE /todos/:id → eliminar\n\n## Conclusión\n¡Tienes una app full CRUD en minutos!"
     },
     {
       "id": 2,
-      "title": "Análisis de la propuesta 'Temporal' en TC39",
-      "date": "2025-04-15",
-      "excerpt": "Explorando la revolucionaria API Temporal para manejo de fechas en JavaScript",
-      "content": "Ver contenido completo en el artifact..."
+      "title": "Análisis de la propuesta Upsert en TC39",
+      "date": "2025-12-13",
+      "excerpt": "La propuesta Upsert avanzó a Stage 3 en 2025",
+      "content": "# Análisis de la propuesta Upsert en TC39\n\nLa propuesta **Upsert** (Stage 3 desde julio 2025) permite insertar o actualizar en Map/Array de forma nativa.\n\n## Problema que resuelve\nEvita código verboso con find + update/insert.\n\n## Ejemplo\n```js\nmap.upsert('contador', v => v ? v + 1 : 1);\n```\n\n## Relevancia\nPatrón común en contadores, caches y merge de datos.\n\n## Mi opinión\nMuy útil para código limpio. Riesgo mínimo. ¡Apoyo total!"
     }
+  ],
+  "experiencia": [
+    {
+      "id": 1,
+      "empresa": "Destellos de Amor",
+      "puesto": "Desarrollador Web y Soporte Técnico",
+      "periodo": "2024 - Actual",
+      "actual": true,
+      "descripcion": "Elaboración de publicidad mediante páginas web. Soporte a maquinarias y mantenimiento.",
+      "responsable": "Katherine Taco - 098451104"
+    },
+    {
+      "id": 2,
+      "empresa": "SECURITY S.A",
+      "puesto": "Seguridad Web",
+      "periodo": "2023",
+      "descripcion": "Funciones de seguridad de páginas web.",
+      "responsable": "Andrea Pinto"
+    },
+    {
+      "id": 3,
+      "empresa": "Automotors S.A",
+      "puesto": "Digitador Responsable",
+      "periodo": "2023",
+      "descripcion": "Digitación y manejo de base de datos.",
+      "responsable": "María José Escanta - 0998602722"
+    },
+    {
+      "id": 4,
+      "empresa": "Cyber Liz",
+      "puesto": "Atención al Cliente",
+      "periodo": "2019",
+      "descripcion": "Atención al cliente en cibercafé.",
+      "responsable": "Rodrigo Taco - 0985834706"
+    }
+  ],
+  "habilidades": [
+    { "id": 1, "nombre": "Base de Datos", "nivel": 85 },
+    { "id": 2, "nombre": "Creación de API", "nivel": 80 },
+    { "id": 3, "nombre": "Desarrollo Web", "nivel": 90 },
+    { "id": 4, "nombre": "Soporte Técnico Web", "nivel": 88 },
+    { "id": 5, "nombre": "Diseño con Canva", "nivel": 90 },
+    { "id": 6, "nombre": "Illustrator", "nivel": 75 },
+    { "id": 7, "nombre": "Configuración PC/Celulares", "nivel": 92 },
+    { "id": 8, "nombre": "Office (Word, Excel, PowerPoint)", "nivel": 95 }
   ]
 }
