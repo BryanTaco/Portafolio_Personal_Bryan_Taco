@@ -1,16 +1,58 @@
-# React + Vite
+Portafolio Personal - Bryan Steven Taco
+¡Bienvenido a mi portafolio web personal! Este sitio es una versión digital y interactiva de mi CV, construido con React, Framer Motion y Lucide Icons para ofrecer una experiencia moderna, animada y responsive.
+Bryan Steven Taco
+Visión General
+Este portafolio presenta mi información profesional de manera clara y elegante:
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Inicio: Foto, contacto, resumen, experiencia laboral, educación y referencias.
+Habilidades: Detalle completo de mis competencias técnicas con barras de progreso animadas y descripción de herramientas/tecnologías usadas.
+Blog: Sección para publicaciones técnicas (actualmente con ejemplos).
 
-Currently, two official plugins are available:
+Características Destacadas
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Diseño responsive – Se adapta perfectamente a móviles, tablets y desktops.
+Modo oscuro/claro – Botón para alternar tema (se guarda la preferencia).
+Animaciones suaves – Entradas de elementos, barras de progreso que se llenan al scroll, hover con efecto glass y flotación en tarjetas.
+Efecto glassmorphism – Tarjetas translúcidas con blur intenso y sombras profundas para un look premium.
+Interactividad – Contactos clicables (teléfono, email, ubicación en Google Maps), descarga directa de CV, enlaces a GitHub y LinkedIn.
+Navegación simple – Header fijo con enlaces a Inicio, Habilidades y Blog.
 
-## React Compiler
+Tecnologías Utilizadas
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+React – Estructura principal.
+Framer Motion – Animaciones fluidas y efectos hover.
+Lucide React – Iconos modernos y ligeros.
+Tailwind CSS (implícito en clases) – Estilos rápidos y consistentes.
+Vite – Recomendado para desarrollo y build rápido.
 
-## Expanding the ESLint configuration
+Cómo Ejecutar Localmente
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+Clona el repositorio:Bashgit clone https://github.com/BryanTaco/tu-portafolio.git
+Entra al directorio:Bashcd tu-portafolio
+Instala dependencias:Bashnpm install
+Ejecuta en modo desarrollo:Bashnpm run dev
+Abre http://localhost:5173 (o el puerto indicado).
+
+Archivos Importantes en /public
+
+PERFIL.JPG – Tu foto de perfil.
+Bryan Steven Taco CV.pdf – El PDF descargable del CV.
+
+Deploy
+Puedes desplegar fácilmente en:
+
+Vercel
+Netlify
+GitHub Pages
+
+Solo conecta tu repositorio y listo.
+Contacto
+
+Email: bryantaco10@gmail.com
+Teléfono: +593 996 762 603
+LinkedIn: bryan-taco-8922a5204
+GitHub: BryanTaco
+
+¡Gracias por visitar mi portafolio! Si tienes sugerencias o quieres colaborar, no dudes en contactarme. 🚀
+— Bryan Steven Taco Jaramillo
+Estudiante en Desarrollo de Software
