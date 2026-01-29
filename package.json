@@ -52,5 +52,9 @@
   "bugs": {
     "url": "https://github.com/BryanTaco/Portafolio_Personal_Bryan_Taco/issues"
   },
-  "homepage": "https://github.com/BryanTaco/Portafolio_Personal_Bryan_Taco#readme"
+  "homepage": "https://github.com/BryanTaco/Portafolio_Personal_Bryan_Taco#readme",
+  "npmConfig": {
+    "legacyPeerDeps": true
+  }
+
 }
