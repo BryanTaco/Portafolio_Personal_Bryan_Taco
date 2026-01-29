@@ -7,13 +7,14 @@ import { blogSchema } from '@/lib/validations';
 // GET /api/blog/[slug] - Get single blog post
 export async function GET(
   request: NextRequest,
-  { params }: { params: { slug: string } }
+  { params }: { params: Promise<{ slug: string }> }
 ) {
   try {
+    const { slug } = await params;
     await dbConnect();
 
     const post = await Blog.findOne({
-      slug: params.slug,
+      slug: slug,
       published: true
     });
 
@@ -41,11 +42,12 @@ export async function GET(
 // PUT /api/blog/[slug] - Update blog post (admin only)
 export async function PUT(
   request: NextRequest,
-  { params }: { params: { slug: string } }
+  { params }: { params: Promise<{ slug: string }> }
 ) {
   try {
+    const { slug } = await params;
     // Check authentication
-    const token = getTokenFromHeader(request.headers.get('authorization'));
+    const token = getTokenFromHeader(request.headers.get('authorization') || '');
     if (!token) {
       return NextResponse.json(
         { error: 'Authentication required' },
@@ -77,7 +79,7 @@ export async function PUT(
     const { title, slug: newSlug, excerpt, content, tags, published } = validationResult.data;
 
     // Check if new slug already exists (if changed)
-    if (newSlug !== params.slug) {
+    if (newSlug !== slug) {
       const existingPost = await Blog.findOne({ slug: newSlug });
       if (existingPost) {
         return NextResponse.json(
@@ -87,9 +89,12 @@ export async function PUT(
       }
     }
 
+    // Find existing post first to get publishedAt
+    const existingPost = await Blog.findOne({ slug: slug });
+
     // Update blog post
     const updatedPost = await Blog.findOneAndUpdate(
-      { slug: params.slug },
+      { slug: slug },
       {
         title,
         slug: newSlug,
@@ -97,7 +102,7 @@ export async function PUT(
         content,
         tags: tags || [],
         published,
-        publishedAt: published && !updatedPost?.publishedAt ? new Date() : updatedPost?.publishedAt,
+        publishedAt: published && !existingPost?.publishedAt ? new Date() : existingPost?.publishedAt,
         updatedAt: new Date()
       },
       { new: true }
@@ -128,9 +133,10 @@ export async function PUT(
 // DELETE /api/blog/[slug] - Delete blog post (admin only)
 export async function DELETE(
   request: NextRequest,
-  { params }: { params: { slug: string } }
+  { params }: { params: Promise<{ slug: string }> }
 ) {
   try {
+    const { slug } = await params;
     // Check authentication
     const token = getTokenFromHeader(request.headers.get('authorization'));
     if (!token) {
@@ -150,7 +156,7 @@ export async function DELETE(
 
     await dbConnect();
 
-    const deletedPost = await Blog.findOneAndDelete({ slug: params.slug });
+    const deletedPost = await Blog.findOneAndDelete({ slug: slug });
 
     if (!deletedPost) {
       return NextResponse.json(

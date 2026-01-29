@@ -86,10 +86,11 @@ const mockProjects = [
 // GET /api/projects/[id] - Get single project
 export async function GET(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    const project = mockProjects.find(p => p.id === params.id);
+    const { id } = await params;
+    const project = mockProjects.find(p => p.id === id);
 
     if (!project) {
       return NextResponse.json(
@@ -115,11 +116,12 @@ export async function GET(
 // PUT /api/projects/[id] - Update project (admin only)
 export async function PUT(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
+    const { id } = await params;
     // Check authentication
-    const token = getTokenFromHeader(request.headers.get('authorization'));
+    const token = getTokenFromHeader(request.headers.get('authorization') || '');
     if (!token) {
       return NextResponse.json(
         { error: 'Authentication required' },
@@ -146,7 +148,7 @@ export async function PUT(
       );
     }
 
-    const projectIndex = mockProjects.findIndex(p => p.id === params.id);
+    const projectIndex = mockProjects.findIndex(p => p.id === id);
     if (projectIndex === -1) {
       return NextResponse.json(
         { error: 'Project not found' },
@@ -161,7 +163,7 @@ export async function PUT(
       updatedAt: new Date().toISOString()
     };
 
-    mockProjects[projectIndex] = updatedProject;
+    mockProjects[projectIndex] = updatedProject as any;
 
     return NextResponse.json({
       success: true,
@@ -181,11 +183,12 @@ export async function PUT(
 // DELETE /api/projects/[id] - Delete project (admin only)
 export async function DELETE(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
+    const { id } = await params;
     // Check authentication
-    const token = getTokenFromHeader(request.headers.get('authorization'));
+    const token = getTokenFromHeader(request.headers.get('authorization') || '');
     if (!token) {
       return NextResponse.json(
         { error: 'Authentication required' },
@@ -201,7 +204,7 @@ export async function DELETE(
       );
     }
 
-    const projectIndex = mockProjects.findIndex(p => p.id === params.id);
+    const projectIndex = mockProjects.findIndex(p => p.id === id);
     if (projectIndex === -1) {
       return NextResponse.json(
         { error: 'Project not found' },
