@@ -1,4 +1,4 @@
-'use client';
+ 'use client';
 
 import { motion } from 'framer-motion';
 import { Code, Database, Globe, Smartphone, Server, Shield, Users, Award, Heart, Coffee, Target, Lightbulb } from 'lucide-react';

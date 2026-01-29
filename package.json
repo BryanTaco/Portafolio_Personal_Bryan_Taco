@@ -40,5 +40,22 @@
     "prisma": "^5.22.0",
     "tailwindcss": "^4",
     "typescript": "^5"
-  }
+  },
+  "prisma": {
+    "seed": "tsx prisma/seed.ts"
+  },
+  "description": "This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/BryanTaco/Portafolio_Personal_Bryan_Taco.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "bugs": {
+    "url": "https://github.com/BryanTaco/Portafolio_Personal_Bryan_Taco/issues"
+  },
+  "homepage": "https://github.com/BryanTaco/Portafolio_Personal_Bryan_Taco#readme"
 }
