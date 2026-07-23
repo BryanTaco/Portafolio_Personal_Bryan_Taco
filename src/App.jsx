@@ -566,7 +566,7 @@ const ProjectCard = ({ project, index, totalCards }) => {
     <motion.div
       ref={ref}
       style={{ scale, top: `calc(6rem + ${index * 28}px)` }}
-      className="sticky bg-[#0C0C0C] border-2 border-[#D7E2EA] rounded-[40px] sm:rounded-[50px] md:rounded-[60px] p-4 sm:p-6 md:p-8 mb-[50vh] origin-top flex flex-col gap-8 shadow-2xl"
+      className={`sticky bg-[#0C0C0C] border-2 border-[#D7E2EA] rounded-[40px] sm:rounded-[50px] md:rounded-[60px] p-4 sm:p-6 md:p-8 origin-top flex flex-col gap-8 shadow-2xl ${index < totalCards - 1 ? 'mb-[50vh]' : 'mb-10'}`}
     >
       <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
         <div className="flex items-start gap-4 md:gap-8">
@@ -605,7 +605,7 @@ const ProjectsSection = () => (
         Proyectos
       </h2>
     </FadeIn>
-    <div className="max-w-6xl mx-auto h-[300vh] relative">
+    <div className="max-w-6xl mx-auto relative">
       {db.proyectos.map((project, i) => (
         <ProjectCard key={project.id} project={project} index={i} totalCards={db.proyectos.length} />
       ))}
@@ -614,38 +614,38 @@ const ProjectsSection = () => (
 );
 
 const ReferencesSection = () => (
-  <section id="referencias" className="bg-[#0C0C0C] px-5 sm:px-8 md:px-10 py-20 sm:py-24 md:py-32 border-t border-[#D7E2EA]/5">
+  <section id="referencias" className="relative z-30 bg-[#0C0C0C] px-5 sm:px-8 md:px-10 py-20 sm:py-24 md:py-32 border-t border-[#D7E2EA]/10">
     <FadeIn y={40}>
       <h2 className="hero-heading font-black uppercase text-center text-[clamp(3rem,12vw,160px)] mb-16 sm:mb-20">
         Referencias
       </h2>
     </FadeIn>
 
-    <div className="max-w-4xl mx-auto grid grid-cols-1 sm:grid-cols-3 gap-4">
-      {db.referencias.map((ref, i) => (
-        <FadeIn key={i} delay={i * 0.1} y={20}>
-          <motion.div
-            whileHover={{ borderColor: 'rgba(215,226,234,0.22)' }}
-            className="p-5 sm:p-6 rounded-2xl border border-[#D7E2EA]/10 transition-colors duration-300 h-full flex flex-col"
-            style={{ background: 'rgba(215,226,234,0.02)' }}
-          >
-            <p className="text-[#D7E2EA] font-semibold text-sm sm:text-base mb-1">{ref.nombre}</p>
-            <p className="text-[#D7E2EA]/50 text-xs uppercase tracking-wide mb-0.5">{ref.cargo}</p>
-            <p className="text-[#D7E2EA]/25 text-xs uppercase tracking-wider mb-4">{ref.empresa}</p>
-            <div className="flex flex-col gap-1.5 mt-auto">
-              {ref.telefono && (
-                <a href={`tel:${ref.telefono.replace(/\s/g, '')}`} className="text-[#D7E2EA]/40 hover:text-[#D7E2EA]/70 text-xs font-mono transition-colors">
-                  {ref.telefono}
-                </a>
-              )}
-              {ref.email && (
-                <a href={`mailto:${ref.email}`} className="text-[#D7E2EA]/40 hover:text-[#D7E2EA]/70 text-xs font-mono transition-colors break-all">
-                  {ref.email}
-                </a>
-              )}
-            </div>
-          </motion.div>
-        </FadeIn>
+    <div className="max-w-4xl mx-auto grid grid-cols-1 sm:grid-cols-3 gap-5">
+      {db.referencias.map((persona, i) => (
+        <div
+          key={i}
+          className="p-6 sm:p-7 rounded-2xl border border-[#D7E2EA]/20 h-full flex flex-col gap-1"
+          style={{ background: 'rgba(215,226,234,0.05)' }}
+        >
+          <p className="text-[#D7E2EA] font-semibold text-sm sm:text-base leading-snug">{persona.nombre}</p>
+          <p className="text-[#D7E2EA]/65 text-xs uppercase tracking-wide mt-0.5">{persona.cargo}</p>
+          <p className="text-[#B600A8]/80 text-[0.7rem] uppercase tracking-widest font-medium mb-3">{persona.empresa}</p>
+          <div className="flex flex-col gap-2 mt-auto pt-3 border-t border-[#D7E2EA]/10">
+            {persona.telefono && (
+              <a href={`tel:${persona.telefono.replace(/\s/g, '')}`} className="text-[#D7E2EA]/60 hover:text-[#D7E2EA] text-xs font-mono transition-colors flex items-center gap-1.5">
+                <Phone size={11} className="shrink-0" />
+                {persona.telefono}
+              </a>
+            )}
+            {persona.email && (
+              <a href={`mailto:${persona.email}`} className="text-[#D7E2EA]/60 hover:text-[#D7E2EA] text-xs font-mono transition-colors break-all flex items-center gap-1.5">
+                <Mail size={11} className="shrink-0" />
+                {persona.email}
+              </a>
+            )}
+          </div>
+        </div>
       ))}
     </div>
   </section>
