@@ -120,11 +120,11 @@ export const db = {
       email: "Stalin15_sj@hotmail.com"
     },
     {
-      nombre: "Sra. Ilda Totoy",
-      cargo: "Propietaria",
-      empresa: "Cafetería Aroma Dulce",
-      telefono: "0989584282",
-      email: null
+      nombre: "Msc. Francisco Sánchez Mosquera",
+      cargo: "Coordinador de carreras administrativas",
+      empresa: "Pontificia Universidad Católica del Ecuador",
+      telefono: "0995522265",
+      email: "fjsanchez@puce.edu.ec"
     }
   ],
   servicios: [

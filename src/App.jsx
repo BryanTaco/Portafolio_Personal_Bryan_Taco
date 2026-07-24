@@ -654,7 +654,7 @@ const ReferencesSection = () => (
 const SOCIAL_LINKS = [
   { icon: <MessageCircle size={22} />, label: "WhatsApp", value: "+593 996 762 603", href: db.social.whatsapp },
   { icon: <Mail size={22} />, label: "Email", value: "bryantaco10@gmail.com", href: `mailto:${db.social.email}` },
-  { icon: <Instagram size={22} />, label: "Instagram", value: "@bryantaco", href: db.social.instagram },
+  { icon: <Instagram size={22} />, label: "Instagram", value: "@bryantaco10", href: db.social.instagram },
   { icon: <Linkedin size={22} />, label: "LinkedIn", value: "Bryan Taco", href: db.social.linkedin },
   { icon: <Phone size={22} />, label: "Teléfono", value: "0996762603", href: `tel:${db.social.telefono}` },
   { icon: <MapPin size={22} />, label: "Ubicación", value: "Quito, Ecuador", href: db.social.maps },
