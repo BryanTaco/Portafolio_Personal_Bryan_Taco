@@ -73,12 +73,12 @@ export const db = {
   certificaciones: [
     {
       id: 1,
-      titulo: "3er Lugar — DevChallenge",
+      titulo: "3er Lugar — DevChallenge (IV Edición)",
       tipo: "🏆 Logro",
-      entidad: "Pontificia Universidad Católica del Ecuador (PUCE)",
-      periodo: "Competencia de Desarrollo de Software",
+      entidad: "PUCE TEC · Escuela de Formación Técnica y Tecnológica",
+      periodo: "Enero 2026",
       horas: null,
-      descripcion: "Tercer lugar en DevChallenge, competencia de desarrollo de software de la PUCE, demostrando habilidades técnicas bajo presión y trabajo en equipo."
+      descripcion: "Tercer lugar en la Cuarta Edición del torneo DevChallenge, de la carrera Tecnología Superior en Desarrollo de Software (PUCE), demostrando habilidades técnicas bajo presión y trabajo en equipo."
     },
     {
       id: 2,
