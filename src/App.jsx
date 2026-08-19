@@ -1,6 +1,6 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { motion, useScroll, useTransform, useInView } from 'framer-motion';
-import { Mail, Phone, MapPin, Linkedin, Instagram, MessageCircle } from 'lucide-react';
+import { Mail, Phone, MapPin, Linkedin, Instagram, MessageCircle, Github, Download } from 'lucide-react';
 import { db } from './data/db';
 
 /* ─── COMPONENTES BASE ─── */
@@ -550,11 +550,21 @@ const EducationSection = () => (
   </section>
 );
 
-const VerProyectoButton = () => (
-  <button className="rounded-full border-2 border-[#D7E2EA] text-[#D7E2EA] font-medium uppercase tracking-widest px-8 py-3 sm:px-10 sm:py-3.5 text-sm sm:text-base hover:bg-[#D7E2EA]/10 transition-colors">
-    Ver Proyecto
-  </button>
-);
+const VerProyectoButton = ({ href }) => {
+  const className = "inline-flex items-center gap-2 rounded-full border-2 border-[#D7E2EA] text-[#D7E2EA] font-medium uppercase tracking-widest px-8 py-3 sm:px-10 sm:py-3.5 text-sm sm:text-base transition-colors whitespace-nowrap";
+  if (href) {
+    return (
+      <a href={href} target="_blank" rel="noreferrer" className={`${className} hover:bg-[#D7E2EA] hover:text-[#0C0C0C]`}>
+        Ver Proyecto
+      </a>
+    );
+  }
+  return (
+    <button disabled className={`${className} opacity-40 cursor-not-allowed`}>
+      Próximamente
+    </button>
+  );
+};
 
 const ProjectCard = ({ project, index, totalCards }) => {
   const ref = useRef(null);
@@ -582,7 +592,7 @@ const ProjectCard = ({ project, index, totalCards }) => {
             </div>
           </div>
         </div>
-        <VerProyectoButton />
+        <VerProyectoButton href={project.enlace} />
       </div>
 
       <div className="flex flex-col md:flex-row gap-4 h-auto md:h-[600px]">
@@ -656,6 +666,7 @@ const SOCIAL_LINKS = [
   { icon: <Mail size={22} />, label: "Email", value: "bryantaco10@gmail.com", href: `mailto:${db.social.email}` },
   { icon: <Instagram size={22} />, label: "Instagram", value: "@bryantaco10", href: db.social.instagram },
   { icon: <Linkedin size={22} />, label: "LinkedIn", value: "Bryan Taco", href: db.social.linkedin },
+  { icon: <Github size={22} />, label: "GitHub", value: "BryanTaco", href: db.social.github },
   { icon: <Phone size={22} />, label: "Teléfono", value: "0996762603", href: `tel:${db.social.telefono}` },
   { icon: <MapPin size={22} />, label: "Ubicación", value: "Quito, Ecuador", href: db.social.maps },
 ];
@@ -697,8 +708,16 @@ const ContactSection = () => (
       })}
     </div>
 
-    <FadeIn delay={0.6} y={20} className="flex justify-center">
+    <FadeIn delay={0.6} y={20} className="flex flex-col sm:flex-row justify-center items-center gap-4">
       <ContactBtn href={db.social.whatsapp}>Escribir por WhatsApp</ContactBtn>
+      <a
+        href="/Bryan_Steven_Taco_CV.pdf"
+        download
+        className="inline-flex items-center gap-2.5 rounded-full font-medium uppercase tracking-widest text-[#D7E2EA] px-8 py-3 sm:px-10 sm:py-3.5 md:px-12 md:py-4 text-xs sm:text-sm md:text-base border border-[#D7E2EA]/25 hover:border-[#D7E2EA]/60 hover:bg-[#D7E2EA]/5 transition-all duration-300"
+      >
+        <Download size={17} className="shrink-0" />
+        Descargar CV
+      </a>
     </FadeIn>
   </section>
 );
@@ -717,6 +736,9 @@ const Footer = () => (
         </a>
         <a href={db.social.linkedin} target="_blank" rel="noreferrer" className="text-[#D7E2EA]/25 hover:text-[#D7E2EA]/70 transition-colors duration-200">
           <Linkedin size={18} />
+        </a>
+        <a href={db.social.github} target="_blank" rel="noreferrer" className="text-[#D7E2EA]/25 hover:text-[#D7E2EA]/70 transition-colors duration-200">
+          <Github size={18} />
         </a>
         <a href={`mailto:${db.social.email}`} className="text-[#D7E2EA]/25 hover:text-[#D7E2EA]/70 transition-colors duration-200">
           <Mail size={18} />

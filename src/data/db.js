@@ -3,7 +3,7 @@ export const db = {
     whatsapp: "https://wa.me/593996762603",
     instagram: "https://instagram.com/bryantaco",
     linkedin: "https://linkedin.com/in/bryantaco",
-    github: "https://github.com/bryantaco",
+    github: "https://github.com/BryanTaco",
     email: "bryantaco10@gmail.com",
     telefono: "0996762603",
     maps: "https://maps.app.goo.gl/gcobGwoetWC4Xf3m8"
@@ -162,9 +162,23 @@ export const db = {
   proyectos: [
     {
       id: 1,
+      nombre: "DecorMimbre — E-commerce Artesanal",
+      categoria: "Full Stack · En Producción",
+      descripcion: "Plataforma web para una marca de muebles artesanales de mimbre: catálogo dinámico, cotizador en línea, personalización de productos y asistente virtual. Diseño cinemático y experiencia premium.",
+      enlace: "https://decormimbre-app.vercel.app",
+      imagenes: [
+        "/decormimbre-1.jpg",
+        "/decormimbre-2.jpg",
+        "/decormimbre-3.jpg"
+      ],
+      tecnologias: ["React", "Next.js", "Tailwind CSS", "Vercel"]
+    },
+    {
+      id: 2,
       nombre: "Gestor Inmobiliario Avanzado",
       categoria: "Full Stack",
       descripcion: "Sistema completo de gestión de propiedades con autenticación, dashboard y reportes en tiempo real.",
+      enlace: null,
       imagenes: [
         "https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&w=600&h=230&q=80",
         "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=600&h=340&q=80",
@@ -173,10 +187,11 @@ export const db = {
       tecnologias: ["React", "Node.js", "PostgreSQL"]
     },
     {
-      id: 2,
+      id: 3,
       nombre: "App Móvil de Delivery",
       categoria: "Desarrollo Móvil",
       descripcion: "Aplicación de entrega con geolocalización en tiempo real, pagos integrados y tracking de pedidos.",
+      enlace: null,
       imagenes: [
         "https://images.unsplash.com/photo-1526367790999-0150786686a2?auto=format&fit=crop&w=600&h=230&q=80",
         "https://images.unsplash.com/photo-1512054502232-10a0a035d672?auto=format&fit=crop&w=600&h=340&q=80",
@@ -185,10 +200,11 @@ export const db = {
       tecnologias: ["React Native", "Express", "MongoDB"]
     },
     {
-      id: 3,
+      id: 4,
       nombre: "Panel Admin PostgreSQL",
       categoria: "Backend & BD",
       descripcion: "Dashboard administrativo con visualización avanzada de datos, reportes y gestión completa de BD.",
+      enlace: null,
       imagenes: [
         "https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=600&h=230&q=80",
         "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=600&h=340&q=80",
