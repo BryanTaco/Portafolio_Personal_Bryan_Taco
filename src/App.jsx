@@ -328,10 +328,14 @@ const MarqueeSection = () => {
 
 const BADGES = [
   "Full Stack Dev",
+  "Arquitectura Empresarial",
+  "Cloud AWS",
+  "Ciberseguridad",
+  "Apps Móviles",
+  "DevOps · Scrum",
   "Diseñador UI/UX",
-  "Moda Urbana & Formal",
   "PUCE · Sistemas",
-  "React + Node",
+  "Emprendimiento",
   "Bilingüe",
 ];
 
@@ -352,9 +356,15 @@ const AboutSection = () => (
 
     <div className="flex flex-col items-center z-10 max-w-3xl">
       <FadeIn delay={0} y={40}>
-        <h2 className="hero-heading font-black uppercase leading-none tracking-tight text-center text-[clamp(3rem,12vw,160px)] mb-10 sm:mb-12">
+        <h2 className="hero-heading font-black uppercase leading-none tracking-tight text-center text-[clamp(3rem,12vw,160px)] mb-8 sm:mb-10">
           Sobre Mí
         </h2>
+      </FadeIn>
+
+      <FadeIn delay={0.05} y={30} className="mb-8 sm:mb-10">
+        <div className="w-32 h-32 sm:w-40 sm:h-40 rounded-full p-[3px] bg-gradient-to-br from-[#B600A8] to-[#D7E2EA]/30 shadow-[0_0_40px_rgba(182,0,168,0.25)]">
+          <img src="/PERFIL.JPG" alt="Bryan Taco" className="w-full h-full rounded-full object-cover border-2 border-[#0C0C0C]" />
+        </div>
       </FadeIn>
 
       <div className="flex flex-wrap justify-center gap-2 sm:gap-3 mb-10 sm:mb-12">
@@ -374,7 +384,7 @@ const AboutSection = () => (
         ))}
       </div>
 
-      <AnimatedText text="Soy Bryan Taco, estudiante de Ingeniería en Sistemas en la PUCE. Desarrollador full stack y diseñador UI/UX. Me apasiona la moda — visto urbano y formal — porque creo que el estilo, como el código, dice quién eres antes de que hables. Si buscas alguien técnico con carácter, hablemos." />
+      <AnimatedText text="Soy Bryan Taco, Ingeniero en Sistemas (PUCE) y desarrollador full stack. Construyo aplicaciones web y móviles seguras y escalables, diseño arquitectura empresarial con Kotlin, despliego en la nube con AWS y audito vulnerabilidades. Me mueve el detalle: que las cosas funcionen bien, sean confiables y estén bien hechas. Busco sumar a un equipo donde la tecnología genere impacto real." />
 
       <div className="mt-14 sm:mt-16 md:mt-20">
         <ContactBtn />
@@ -543,6 +553,38 @@ const EducationSection = () => (
             <h3 className="text-[#D7E2EA] font-semibold text-base sm:text-lg mb-0.5">{edu.institucion}</h3>
             <p className="text-[#D7E2EA]/50 text-xs sm:text-sm uppercase tracking-wide mb-3">{edu.titulo}</p>
             <p className="text-[#D7E2EA]/40 text-sm leading-relaxed">{edu.descripcion}</p>
+          </motion.div>
+        </FadeIn>
+      ))}
+    </div>
+  </section>
+);
+
+const CertificationsSection = () => (
+  <section id="certificaciones" className="bg-[#0C0C0C] px-5 sm:px-8 md:px-10 py-20 sm:py-24 md:py-32 border-t border-[#D7E2EA]/5">
+    <FadeIn y={40}>
+      <h2 className="hero-heading font-black uppercase text-center text-[clamp(2.5rem,10vw,140px)] mb-4 sm:mb-6">
+        Logros y Certificaciones
+      </h2>
+    </FadeIn>
+
+    <div className="max-w-4xl mx-auto grid grid-cols-1 sm:grid-cols-2 gap-5 mt-12 sm:mt-16">
+      {db.certificaciones.map((cert, i) => (
+        <FadeIn key={cert.id} delay={i * 0.12} y={30}>
+          <motion.div
+            whileHover={{ borderColor: 'rgba(182,0,168,0.4)', y: -4 }}
+            className="h-full p-6 sm:p-7 rounded-2xl border border-[#D7E2EA]/12 flex flex-col gap-2 transition-colors duration-300"
+            style={{ background: 'rgba(215,226,234,0.03)' }}
+          >
+            <span className="self-start text-[0.65rem] px-3 py-1 rounded-full border border-[#B600A8]/40 text-[#B600A8] font-semibold uppercase tracking-widest">
+              {cert.tipo}
+            </span>
+            <h3 className="text-[#D7E2EA] font-semibold text-lg sm:text-xl leading-snug mt-1">{cert.titulo}</h3>
+            <p className="text-[#D7E2EA]/55 text-sm">{cert.entidad}</p>
+            {cert.periodo && (
+              <p className="text-[#D7E2EA]/35 text-xs uppercase tracking-widest font-mono">{cert.periodo}</p>
+            )}
+            <p className="text-[#D7E2EA]/40 text-sm leading-relaxed mt-1">{cert.descripcion}</p>
           </motion.div>
         </FadeIn>
       ))}
@@ -775,6 +817,7 @@ function App() {
       <ServicesSection />
       <ExperienceSection />
       <EducationSection />
+      <CertificationsSection />
       <ProjectsSection />
       <ReferencesSection />
       <ContactSection />

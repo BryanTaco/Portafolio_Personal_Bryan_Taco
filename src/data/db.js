@@ -17,20 +17,24 @@ export const db = {
   habilidades: [
     { nombre: "React / Next.js", nivel: 90, categoria: "Frontend" },
     { nombre: "Node.js / Express", nivel: 85, categoria: "Backend" },
+    { nombre: "Arquitectura Empresarial (Kotlin + Spring Boot)", nivel: 82, categoria: "Backend" },
     { nombre: "PostgreSQL / MySQL", nivel: 82, categoria: "Bases de Datos" },
-    { nombre: "Spring Boot", nivel: 70, categoria: "Backend" },
+    { nombre: "AWS (EC2, S3) · Cloud Computing", nivel: 80, categoria: "Cloud" },
+    { nombre: "Ciberseguridad", nivel: 82, categoria: "Seguridad" },
+    { nombre: "GitLab CI/CD · Pipelines", nivel: 83, categoria: "DevOps" },
+    { nombre: "Scrum · Jira", nivel: 86, categoria: "Metodologías" },
+    { nombre: "Apps Móviles (Android · iOS · Híbridas)", nivel: 78, categoria: "Móvil" },
     { nombre: "Tailwind CSS", nivel: 93, categoria: "Frontend" },
-    { nombre: "Photoshop / Illustrator", nivel: 85, categoria: "Diseño" },
-    { nombre: "Canva", nivel: 95, categoria: "Diseño" },
-    { nombre: "MongoDB", nivel: 75, categoria: "Bases de Datos" },
-    { nombre: "Git / GitHub", nivel: 88, categoria: "DevOps" },
-    { nombre: "React Native / Flutter", nivel: 72, categoria: "Móvil" }
+    { nombre: "Diseño UI/UX (Figma, PS, AI)", nivel: 88, categoria: "Diseño" },
+    { nombre: "Git / GitHub", nivel: 88, categoria: "DevOps" }
   ],
   tecnologias: [
     "React", "Next.js", "Node.js", "Express", "Spring Boot",
-    "PostgreSQL", "MySQL", "MongoDB", "Tailwind CSS", "Framer Motion",
-    "Git", "Photoshop", "Illustrator", "Canva", "Figma",
-    "React Native", "TypeScript", "Docker"
+    "Kotlin", "TypeScript", "PostgreSQL", "MySQL", "MongoDB",
+    "AWS", "Amazon EC2", "Amazon S3", "Docker", "GitLab CI/CD",
+    "Jira", "Scrum", "Git", "Android", "SwiftUI (iOS)",
+    "React Native", "Ciberseguridad", "Tailwind CSS", "Framer Motion",
+    "Figma", "Photoshop", "Illustrator", "Canva"
   ],
   educacion: [
     {
@@ -64,6 +68,26 @@ export const db = {
       periodo: "2006 - 2012",
       actual: false,
       descripcion: "Formación base con valores, disciplina y excelencia académica en una institución de tradición salesiana."
+    }
+  ],
+  certificaciones: [
+    {
+      id: 1,
+      titulo: "3er Lugar — DevChallenge",
+      tipo: "🏆 Logro",
+      entidad: "Pontificia Universidad Católica del Ecuador (PUCE)",
+      periodo: "Competencia de Desarrollo de Software",
+      horas: null,
+      descripcion: "Tercer lugar en DevChallenge, competencia de desarrollo de software de la PUCE, demostrando habilidades técnicas bajo presión y trabajo en equipo."
+    },
+    {
+      id: 2,
+      titulo: "Ciclo de Propiedad Intelectual en Universidades",
+      tipo: "Certificado de Asistencia",
+      entidad: "HUB-UIO · Erasmus+ (Unión Europea)",
+      periodo: "2022 · 22 horas",
+      horas: "22 horas",
+      descripcion: "Programa virtual sobre propiedad intelectual en el ámbito universitario, con el apoyo de TETRIS, OpenLabEc y GüeTech (ago – oct 2022)."
     }
   ],
   experiencia: [
@@ -151,10 +175,30 @@ export const db = {
     {
       id: "05",
       titulo: "Desarrollo Móvil",
-      descripcion: "Aplicaciones móviles multiplataforma con React Native o Flutter adaptadas a cualquier necesidad."
+      descripcion: "Aplicaciones nativas para Android e iOS (SwiftUI), e híbridas con React Native. Experiencias móviles rápidas y adaptadas a cada plataforma."
     },
     {
       id: "06",
+      titulo: "Arquitectura Empresarial",
+      descripcion: "Sistemas empresariales robustos y mantenibles con Kotlin y Spring Boot, aplicando buenas prácticas de arquitectura y patrones de diseño."
+    },
+    {
+      id: "07",
+      titulo: "Cloud Computing (AWS)",
+      descripcion: "Despliegue, escalado y administración de infraestructura en la nube con AWS: EC2, S3 y servicios asociados para alta disponibilidad."
+    },
+    {
+      id: "08",
+      titulo: "Ciberseguridad",
+      descripcion: "Auditoría de vulnerabilidades, hardening de sistemas y buenas prácticas de seguridad para proteger aplicaciones y datos sensibles."
+    },
+    {
+      id: "09",
+      titulo: "DevOps & Metodologías Ágiles",
+      descripcion: "Automatización con pipelines CI/CD en GitLab y gestión de proyectos con Scrum y Jira para entregas continuas y de calidad."
+    },
+    {
+      id: "10",
       titulo: "Soporte Técnico",
       descripcion: "Mantenimiento, despliegue y configuración de servidores, hosting, hardware y software."
     }
